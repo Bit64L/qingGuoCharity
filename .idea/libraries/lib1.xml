@@ -1,0 +1,32 @@
+<component name="libraryTable">
+  <library name="lib1">
+    <CLASSES>
+      <root url="jar:///usr/local/tomcat8.0/lib/tomcat-util.jar!/" />
+      <root url="jar:///usr/local/tomcat8.0/lib/tomcat-jdbc.jar!/" />
+      <root url="jar:///usr/local/tomcat8.0/lib/catalina-storeconfig.jar!/" />
+      <root url="jar:///usr/local/tomcat8.0/lib/catalina-ha.jar!/" />
+      <root url="jar:///usr/local/tomcat8.0/lib/tomcat-websocket.jar!/" />
+      <root url="jar:///usr/local/tomcat8.0/lib/tomcat-dbcp.jar!/" />
+      <root url="jar:///usr/local/tomcat8.0/lib/jasper-el.jar!/" />
+      <root url="jar:///usr/local/tomcat8.0/lib/tomcat-coyote.jar!/" />
+      <root url="jar:///usr/local/tomcat8.0/lib/servlet-api.jar!/" />
+      <root url="jar:///usr/local/tomcat8.0/lib/annotations-api.jar!/" />
+      <root url="jar:///usr/local/tomcat8.0/lib/catalina-ant.jar!/" />
+      <root url="jar:///usr/local/tomcat8.0/lib/tomcat-i18n-es.jar!/" />
+      <root url="jar:///usr/local/tomcat8.0/lib/el-api.jar!/" />
+      <root url="jar:///usr/local/tomcat8.0/lib/tomcat-i18n-ja.jar!/" />
+      <root url="jar:///usr/local/tomcat8.0/lib/jasper.jar!/" />
+      <root url="jar:///usr/local/tomcat8.0/lib/tomcat-util-scan.jar!/" />
+      <root url="jar:///usr/local/tomcat8.0/lib/tomcat-api.jar!/" />
+      <root url="jar:///usr/local/tomcat8.0/lib/tomcat-i18n-fr.jar!/" />
+      <root url="jar:///usr/local/tomcat8.0/lib/ecj-4.6.3.jar!/" />
+      <root url="jar:///usr/local/tomcat8.0/lib/tomcat-jni.jar!/" />
+      <root url="jar:///usr/local/tomcat8.0/lib/catalina.jar!/" />
+      <root url="jar:///usr/local/tomcat8.0/lib/websocket-api.jar!/" />
+      <root url="jar:///usr/local/tomcat8.0/lib/catalina-tribes.jar!/" />
+      <root url="jar:///usr/local/tomcat8.0/lib/jsp-api.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
