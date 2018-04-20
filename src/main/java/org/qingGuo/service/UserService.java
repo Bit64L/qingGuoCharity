@@ -19,4 +19,9 @@ public class UserService {
         map.put("user",user);
         return userDao.getUser(map);
     }
+
+    public boolean addUsebr(Map<String, Object> map) {
+        userDao.add(map);
+        return true;
+    }
 }

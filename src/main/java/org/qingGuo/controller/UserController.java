@@ -4,30 +4,39 @@ package org.qingGuo.controller;
 import org.qingGuo.model.User;
 import org.qingGuo.service.UserService;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import javax.servlet.http.HttpServletRequest;
+
 import javax.annotation.Resource;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
+@RequestMapping(value = "/user")
 public class UserController {
     @Resource
     UserService userService;
 
 
-    @RequestMapping(value = "/index",method = RequestMethod.GET)
-    public String main() {
-        return "index";
+    @RequestMapping(value = "addUser")
+    public String addUser(User user){
+        Map<String,Object> map = new HashMap<String, Object>();
+        map.put("user",user);
+        userService.addUsebr(map);
+        return "/login";
     }
 
-    @RequestMapping(value = "/user")
-    public String test(ModelMap modelMap, HttpServletRequest request) {
-        String id = request.getParameter("id");
-        User user = new User();
-        user.setId(Integer.parseInt(id));
-        userService.getUser(user);
-        modelMap.put("user", user);
-        return "index";
+    @RequestMapping(value = "userCenter")
+    public String userCenter(){
+        return "user/userCenter";
+    }
+
+    @RequestMapping(value="userHead")
+    public String userHead(){
+        return "user/userHead";
+    }
+
+    @RequestMapping(value = "userPassword")
+    public String userPassword(){
+        return "user/userPassword";
     }
 }
