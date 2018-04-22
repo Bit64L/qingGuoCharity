@@ -17,11 +17,22 @@ public class UserController {
     UserService userService;
 
 
+
+    @RequestMapping(value="testUser")
+    public String testUser(){
+        Map<String,Object> map = new HashMap<String, Object>();
+        User user = new User();
+        user.setName("test");
+        map.put("user",user);
+        user  = userService.getUser(map);
+        System.out.println(user.getId());
+        return "";
+    }
+
     @RequestMapping(value = "addUser")
     public String addUser(User user){
         Map<String,Object> map = new HashMap<String, Object>();
         map.put("user",user);
-        userService.addUsebr(map);
         return "/login";
     }
 
