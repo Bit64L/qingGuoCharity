@@ -41,6 +41,7 @@
 
 ## System Architecture
 <img src="https://github.com/Bit64L/BlogImage/raw/master/qingguo/qingguosysarchi.png">
+
 ## Main Modules
 1. Main Page
 <img src="https://github.com/Bit64L/BlogImage/raw/master/qingguo/qingguo-main-page.png">
