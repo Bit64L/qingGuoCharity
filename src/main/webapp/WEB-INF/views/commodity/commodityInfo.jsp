@@ -12,6 +12,7 @@
             rel="stylesheet">
     <link href="/qingguo/css/commodityNav.css" rel="stylesheet" type="text/css"/>
     <link href="/qingguo/css/commodity.css" rel="stylesheet" type="text/css">
+    <script src="/qingguo/js/shopping-cart.js"></script>
     <style type="text/css">
         table > tbody > tr > td {
             font-size: 16px;
@@ -23,17 +24,24 @@
 <div class="row">
     <div class="col-md-12">
         <!-- 面包屑导航 -->
-        <div class="standard-out"  style="background: #efefef; padding-top:2px;padding-bottom: 2px";>
-        <ol class="breadcrumb bread-nav">
-            <li><a
-                    href="/ProcurementSystem/buyer/commodityCatalog?currPage=${currPage}&code=${code}"><i
-                    class="fa fa-angle-double-left" aria-hidden="true"></i>返回 </a></li>
-            <li><a href="/ProcurementSystem/buyer/commodityCatalog">目录主页</a></li>
-            <%--<c:forEach var="node" items="${}" varStatus="status">--%>
-
-            <%--</c:forEach>--%>
-        </ol>
-    </div>
+        <div class="standard-out" style="background: #efefef; padding-top:2px;padding-bottom: 2px" ;>
+            <ol class="breadcrumb bread-nav">
+                <li><a href=""><i
+                        class="fa fa-angle-double-left" aria-hidden="true"></i>返回 </a></li>
+                <li><a href="/qingguo/index">目录主页</a></li>
+                <c:if test="${commodity.firstClassName != null and commodity.firstClassName != ''}">
+                    <li>
+                        <a href="/qingguo/commodity/commodityCatalog?firstClassName=${commodity.firstClassName}">${commodity.firstClassName}</a>
+                    </li>
+                </c:if>
+                <c:if test="${commodity.secondClassName != null and commodity.secondClassName != ''}">
+                    <li>
+                        <a href="/qingguo/commodity/commodityCatalog?firstClassName=${commodity.firstClassName} & secondClassName=${commodity.secondClassName}">${commodity.secondClassName}</a>
+                    </li>
+                </c:if>
+                <li><a>${commodity.name}</a></li>
+            </ol>
+        </div>
     </div>
 </div>
 <div class="content">
@@ -47,14 +55,14 @@
                                 <div class="bigImg">
                                     <img id=iimage-
                                          onerror="error('image-');"
-                                         src="/qingguo/images/material1.jpg">
+                                         src="${commodity.image}">
                                 </div>
                                 <div class="smallImgs">
                                     <%--<c:forEach var="path" items="${paths}">--%>
                                     <div class="smallImg left">
-                                    <img id=image-${commodity.uniqueName}
-                                    src="/qingguo/images/material1.jpg"
-                                    onerror="error('image-');">
+                                        <img id=image-${commodity.id}
+                                             src="${commodity.image}"
+                                             onerror="error('image-');">
                                     </div>
                                     <%--</c:forEach>--%>
                                 </div>
@@ -66,27 +74,27 @@
 
                     <div class="" style="padding-left: 100px;">
                         <div class="standard-title-main margin-bottom">
-                            <strong>标题</strong>
+                            <strong>${commodity.name}</strong>
                         </div>
                         <table class="commodity-item-table">
                             <tr>
                                 <td class="right">主题：</td>
-                                <td></td>
+                                <td>${commodity.theme}</td>
                             </tr>
                             <tr>
                                 <td class="right">周期：</td>
-                                <td></td>
+                                <td>${commodity.period}</td>
                             </tr>
 
                             <tr>
                                 <td class="right">公益积分：</td>
-                                <td></td>
+                                <td>${commodity.credit}</td>
 
                             </tr>
                             <tr>
                                 <td class="right">价格：</td>
                                 <td>
-                                    <div class="item-price-green">￥100
+                                    <div class="item-price-green">￥${commodity.price}
                                     </div>
                                     <div class="item-price-grey">&nbsp;／个</div>
                                 </td>
@@ -96,9 +104,9 @@
                             <br>
                             <div class="item-price-black">
                                 数量： <input class="item-quantity"
-                                           id="quantity_" value="1"/>
+                                           id="quantity_${commodity.id}" value="1"/>
                                 <button class="item-add"
-                                        onclick="add();">添加到购物车
+                                        onclick="add(${commodity.id});">添加到购物车
                                 </button>
                             </div>
                             <div>
@@ -113,7 +121,7 @@
                 <div class="col-md-12">
                     <div class="margin-bottom">
                         <div class="standard-subtitle">产品说明</div>
-                        <div style="font-size:16px; ">关于产品的一些说明</div>
+                        <div style="font-size:16px; ">${commodity.intro}</div>
                         <br>
                     </div>
                 </div>
@@ -121,7 +129,7 @@
         </div>
     </div>
 </div>
-<%@include file="../footer.jsp"%>
+<%@include file="../footer.jsp" %>
 </body>
 <script>
     function add(uniqueName) {

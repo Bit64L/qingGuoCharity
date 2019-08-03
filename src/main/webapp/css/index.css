@@ -20,3 +20,7 @@
 .title-content div img{
     width:200px;
 }
+
+.carousel-inner .item img{
+    height: 406px;
+}

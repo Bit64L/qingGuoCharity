@@ -21,9 +21,9 @@
     <div class="col-md-12">
         <div class="header-first standard-out">
             <div class="left">
-                <a href="/qingguo">首页</a>
-                <a href="login">登录</a>
-                <a href="register">注册</a>
+                <a href="/qingguo/index">首页</a>
+                <a href="/qingguo/login">登录</a>
+                <a href="/qingguo/register">注册</a>
             </div>
             <div class="clear"></div>
         </div>
@@ -33,21 +33,41 @@
     <div class="wrapper" style="height:700px">
         <div class="container">
             <div class="row">
-                <div class="col-md-12" >
+                <div class="col-md-12">
                     <h1>欢迎加入青果会员</h1>
-                    <form class="form" method="post" action="addUser">
+                    <form class="form" method="post" action="user/addUser">
                         <input type="text" placeholder="请输入您的用户名(手机号)" name="phone" class="inputLogin" id="phone">
+                        <div style="height:26px;width:300px; text-align:right;">
+                            <input id="error-phone" class="error" value="" disabled/>
+                        </div>
                         <input type="text" placeholder="请输入您的昵称" name="name" class="inputLogin" id="name">
+                        <div style="height:26px;width:300px; text-align:right;">
+                            <input id="error-name" class="error" value="" disabled/>
+                        </div>
                         <input type="text" name="email" placeholder="请输入您的电子邮箱" class="inputLogin" id="email">
+                        <div style="height:26px;width:300px; text-align:right;">
+                            <input id="error-email" class="error" value="" disabled/>
+                        </div>
                         <input type="password" name="password" placeholder="请设置您的登录密码" class="inputLogin" id="psd">
-                        <input type="password" name="password" placeholder="请重复您的登录密码" class="inputLogin" id="repsd">
+                        <div style="height:26px;width:300px; text-align:right;">
+                            <input id="error-psd" class="error" value="" disabled/>
+                        </div>
+                        <input type="password" name="repassword" placeholder="请重复您的登录密码" class="inputLogin" id="repsd">
+                        <div style="height:26px;width:300px; text-align:right;">
+                            <input id="error-repsd" class="error" value="" disabled/>
+                        </div>
+
                         <input type="text" name="company" placeholder="请输入您的工作单位" class="inputLogin" id="company">
+                        <div style="height:26px;width:300px; text-align:right;">
+                            <input id="error-company" class="error" value="" disabled/>
+                        </div>
                         <div class="radio"
                              style="margin-bottom:2px; margin-top:-2px; font-size:16px; width:200px; display:inline-block; color:black;"
                              onChange="showSignUp();">
-                            <label> <input type="radio" name="gender" id="buyer" value="buyer" checked>男</label> &nbsp;&nbsp;&nbsp;
-                            <label> <input type="radio" name="gender" id="supplier" value="supplier">女</label>
-                        </div>
+                            <label> <input type="radio" name="gender" id="buyer" value="男" checked>男</label> &nbsp;&nbsp;&nbsp;
+                            <label> <input type="radio" name="gender" id="supplier" value="女">女</label>
+                        </div>u
+                        <input type="hidden" name="role" value="普通用户">
                         <button id="login-button" style="margin-top:14px; display:block;" onclick="return check();">注册
                         </button>
                     </form>
@@ -70,7 +90,22 @@
         //     $("#useralert").val("请输入用户名");
         //     return false;
         // }
-        return true;
+        var psd = $("#psd").val();
+        var repsd = $("#repsd").val();
+        var inputLogins = $(".inputLogin");
+        var success = true;
+        for (var i = 0; i < inputLogins.length; i++) {
+            var inputLogin = $(inputLogins[i]);
+            if (inputLogin.val() == "") {
+                $("#error-" + inputLogin.attr("id")).val("不能为空");
+                success = false;
+            }
+        }
+        if (psd != repsd) {
+            $("#error-repsd").val("密码不一致");
+            success = false;
+        }
+        return success;
     }
 </script>
 

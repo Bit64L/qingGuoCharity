@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.qingGuo.dao.ShoppingCartDetailDao">
+    <resultMap id="BaseResultMap" type="org.qingGuo.model.ShoppingCartDetail">
+        <id column="shopping_cart_detail_id" property="id"/>
+        <result column="shopping_cart_detail_goods_count" property="goodsCount"/>
+        <result column="shopping_cart_detail_goods_money" property="goodsMoney"/>
+        <association property="commodity" javaType="org.qingGuo.model.Commodity">
+            <id column="goods_id" property="id"/>
+            <result column="goods_name" property="name" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <result column="goods_price" property="price"/>
+            <result column="goods_intro" property="intro" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <result column="goods_create_time" property="createTime" jdbcType="TIMESTAMP"
+                    javaType="java.util.Date"/>
+            <result column="goods_image" property="image" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <result column="goods_type_id" property="typeId" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <result column="goods_theme" property="theme" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <result column="goods_period" property="period" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <result column="goods_credit" property="credit" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <result column="goods_first_class_name" property="firstClassName" jdbcType="VARCHAR"
+                    javaType="java.lang.String"/>
+            <result column="goods_second_class_name" property="secondClassName" jdbcType="VARCHAR"
+                    javaType="java.lang.String"/>
+            <association property="user" javaType="org.qingGuo.model.User">
+                <id column="user_id" property="id"/>
+                <result column="user_name" property="name" javaType="java.lang.String" jdbcType="VARCHAR"/>
+                <result column="user_phone" property="phone" javaType="java.lang.String" jdbcType="VARCHAR"/>
+                <result column="user_password" property="password" javaType="java.lang.String" jdbcType="VARCHAR"/>
+                <result column="user_role" property="role" javaType="java.lang.String" jdbcType="VARCHAR"/>
+                <result column="user_account" property="account" javaType="java.lang.String" jdbcType="VARCHAR"/>
+                <result column="user_email" property="email" javaType="java.lang.String" jdbcType="VARCHAR"/>
+                <result column="user_gender" property="gender" javaType="java.lang.String" jdbcType="VARCHAR"/>
+                <result column="user_wechat" property="wechat" javaType="java.lang.String" jdbcType="VARCHAR"/>
+                <result column="user_location" property="location" javaType="java.lang.String" jdbcType="VARCHAR"/>
+                <result column="user_birthday" property="birthday" javaType="java.lang.String" jdbcType="VARCHAR"/>
+                <result column="user_headUrl" property="headUrl" javaType="java.lang.String" jdbcType="VARCHAR"/>
+                <result column="user_deposit_status" property="depositStatus" javaType="java.lang.String" jdbcType="VARCHAR"/>
+                <result column="user_field" property="field" javaType="java.lang.String" jdbcType="VARCHAR"/>
+                <result column="user_ps" property="ps" javaType="java.lang.String" jdbcType="VARCHAR"/>
+                <result column="user_id_card" property="idCard" javaType="java.lang.String" jdbcType="VARCHAR"/>
+                <result column="user_account_balance" property="accountBalance"/>
+            </association>
+        </association>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+      shopping_cart_detail.id as shopping_cart_detail_id, shopping_cart_detail.goods_count as shopping_cart_detail_goods_count, shopping_cart_detail.goods_money as shopping_cart_detail_goods_money,
+      goods.id as goods_id, goods.name as goods_name, goods.price as goods_price, goods.intro as goods_intro, goods.create_time as goods_create_time, goods.image as goods_image, goods.type_id as goods_type_id, goods.theme as goods_theme, goods.period as goods_period, goods.credit as goods_credit, goods.first_class_name as goods_first_class_name, goods.second_class_name as goods_second_class_name, goods.status as goods_status,
+      user.id as user_id, user.name as user_name, user.phone as user_phone, user.create_time as user_create_time, user.password as user_password, user.role as user_role, user.account as user_account, user.login_time as user_login_time, user.email as user_email, user.company as user_company, user.gender as user_gender, user.wechat as we_chat, user.location as user_location, user.birthday as user_birthday, user.headUrl as user_headUrl, user.deposit_status as user_deposit_status,user.field as user_field, user.ps as user_ps, user.id_card as user_id_card,user.account_balance as user_account_balance
+  </sql>
+    <select id="get" resultMap="BaseResultMap" parameterType="Map">
+        select
+        <include refid="Base_Column_List"/>
+        from shopping_cart_detail left join goods on shopping_cart_detail.goods_id = goods.id
+        left join user on user.id = goods.user_id
+        where 1 = 1
+        <if test="shoppingCartDetail.id != null">
+           and
+            shopping_cart_detail.id = #{shoppingCartDetail.id}
+        </if>
+    </select>
+
+    <delete id="delete" parameterType="Map">
+      delete from shopping_cart_detail
+      where shopping_cart_detail.id = #{shoppingCartDetail.id,jdbcType=INTEGER}
+    </delete>
+
+    <insert id="insert" parameterType="Map" useGeneratedKeys="true" keyProperty="shoppingCartDetail.id">
+        insert into shopping_cart_detail (shopping_cart_id, goods_id,
+        goods_count, goods_money)
+        values (#{shoppingCartDetail.shoppingCart.id,jdbcType=INTEGER}, #{shoppingCartDetail.commodity.id, jdbcType=INTEGER},
+        #{shoppingCartDetail.goodsCount,jdbcType=INTEGER}, #{shoppingCartDetail.goodsMoney,jdbcType=INTEGER})
+    </insert>
+
+
+
+    <update id="update" parameterType="Map">
+        update shopping_cart_detail
+        <set>
+            <if test="shoppingCartDetail.id != null">
+                id = #{shoppingCartDetail.id,jdbcType=INTEGER},
+            </if>
+            <if test="shoppingCartDetail.shoppingCart != null">
+                shopping_cart_id = #{shoppingCartDetail.shoppingCart.id,jdbcType=INTEGER},
+            </if>
+            <if test="shoppingCartDetail.commodity != null">
+                goods_id = #{shoppingCartDetail.commodity.id,jdbcType=INTEGER},
+            </if>
+            <if test="shoppingCartDetail.goodsCount != null">
+                goods_count = #{shoppingCartDetail.goodsCount,jdbcType=INTEGER},
+            </if>
+            <if test="shoppingCartDetail.goodsMoney != null">
+                goods_money = #{shoppingCartDetail.goodsMoney,jdbcType=INTEGER},
+            </if>
+        </set>
+
+        where 1 = 1
+
+        <if test="shoppingCartDetail.id != null">
+            and
+            shopping_cart_detail.id = #{shoppingCartDetail.id}
+        </if>
+
+    </update>
+
+
+
+
+</mapper>

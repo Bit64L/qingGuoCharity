@@ -1,0 +1,100 @@
+.result-item {
+    height: 200px;
+    width: 100%;
+    margin-bottom: 5px;
+    border-bottom: 1px solid grey;
+}
+
+.result-items {
+    float: left;
+    padding-top: 5px;
+    padding-left: 40px;
+    padding-bottom: 20px;
+    width: 100%;
+}
+
+.container-thumbnail {
+    margin: 0px 10px 0px 10px;
+}
+
+.item-whole {
+    padding-top: 5px;
+    float: left;
+    width: 60%;
+}
+.item-content-grey, .item-price-grey {
+    color: grey;
+}
+
+.item-content-black, .item-content-blue, .item-content-grey {
+    display: inline-block;
+    line-height: 26px;
+    font-size: 1em;
+}
+
+.item-price {
+    padding-top: 25px;
+    float: left;
+    width: 25%;
+    padding-right: 30px;
+    text-align: right;
+}
+
+
+
+.item-price-green {
+    color: green;
+}
+.item-price-green, .item-price-grey, .item-price-blue, .item-price-black {
+    display: inline-block;
+    line-height: 28px;
+}
+
+.item-price-green, .item-price-grey, .item-price-blue, .item-price-black {
+    display: inline-block;
+    line-height: 28px;
+}
+.item-content-black, .item-price-black {
+    color: black;
+}
+
+.item-quantity {
+    width: 40px;
+    height: 30px;
+    text-align: center;
+}
+
+.item-add {
+    background-color: #428bca;
+    color: white;
+    font-size: 1em;
+    border: 0;
+    width: 100px;
+    height: 30px;
+    text-align: center;
+}
+
+.result-line2 {
+    height: 40px;
+    background-color: #efefef;
+    border-bottom: 1px solid #ddd;
+    border-top: 1px solid #ddd;
+}
+
+.result-line2-left {
+    float: left;
+    padding-top: 4px;
+    padding-left: 10px;
+}
+
+.result-line2-middle {
+    margin-left: 200px;
+    float: left;
+    padding-top: 4px;
+}
+
+.result-line2-right {
+    float: right;
+    padding-top: 4px;
+    padding-right: 10px;
+}

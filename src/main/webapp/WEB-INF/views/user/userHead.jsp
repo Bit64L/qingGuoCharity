@@ -13,10 +13,13 @@
         <%@include file="userInfoNav.jsp" %>
         <br><br>
         <div class="col-md-10">
-            <img src="/qingguo/images/master1.jpg" width="180px">
+            <img src="${user.headUrl}" width="180px">
             <br><br>
             <div>
-                <button class="btn-b">上传图片</button>
+                <form action="userHeadSave" enctype="multipart/form-data" method="post" id="userHeadSave">
+                    <input type="file" name="imageFile">
+                </form>
+                <br>
             </div>
         </div>
     </div>
@@ -24,7 +27,7 @@
         <div class="col-md-2"></div>
         <div class="col-md-10 border-top-grey" style="margin-top: 10px">
             <br>
-            <button class="btn-b right">保存</button>
+            <button class="btn-b right" form="userHeadSave">保存</button>
         </div>
     </div>
 </div>

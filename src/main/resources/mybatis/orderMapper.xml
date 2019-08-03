@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.qingGuo.dao.OrderDao">
+    <resultMap id="BaseResultMap" type="org.qingGuo.model.Order">
+        <id column="order_id" property="id"/>
+        <result column="order_status" property="status"/>
+        <result column="order_total_amount" property="totalAmount"/>
+        <result column="order_total_money" property="totalMoney"/>
+        <result column="order_type" property="type"/>
+        <association property="user" javaType="org.qingGuo.model.User">
+            <id column="order_user_id" property="id"/>
+            <result column="user_name" property="name"/>
+            <result column="user_phone" property="phone"/>
+            <result column="user_create" property="create"/>
+            <result column="user_create_time" property="createTime"/>
+            <result column="user_password" property="password"/>
+            <result column="user_role" property="role"/>
+            <result column="user_account" property="account"/>
+            <result column="user_login_time" property="loginTime"/>
+            <result column="user_email" property="email"/>
+            <result column="user_company" property="company"/>
+            <result column="user_wechat" property="wechat"/>
+            <result column="user_location" property="location"/>
+            <result column="user_birthday" property="birthday"/>
+            <result column="user_headUrl" property="headUrl"/>
+            <result column="user_deposit_status" property="depositStatus"/>
+            <result column="user_field" property="field"/>
+            <result column="user_ps" property="ps"/>
+            <result column="user_id_card" property="idCard"/>
+        </association>
+        <collection property="orderDetails" ofType="org.qingGuo.model.OrderDetail" resultMap="orderDetailMap"/>
+    </resultMap>
+
+
+    <resultMap id="orderDetailMap" type="org.qingGuo.model.OrderDetail">
+        <id column="order_detail_id" property="id"/>
+        <result column="order_detail_goods_count" property="goodsCount"/>
+        <result column="order_detail_goods_money" property="goodsMoney"/>
+        <association property="order" javaType="org.qingGuo.model.Order">
+            <id column="order_id" property="id"/>
+            <result column="order_status" property="status"/>
+            <result column="total_amount" property="totalAmount"/>
+            <result column="order_total_money" property="totalMoney"/>
+        </association>
+        <association property="commodity" javaType="org.qingGuo.model.Commodity">
+            <id column="goods_id" property="id"/>
+            <result column="goods_name" property="name" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <result column="goods_price" property="price"/>
+            <result column="goods_intro" property="intro" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <result column="goods_create_time" property="createTime" jdbcType="TIMESTAMP"
+                    javaType="java.util.Date"/>
+            <result column="goods_image" property="image" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <result column="goods_type_id" property="typeId" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <result column="goods_theme" property="theme" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <result column="goods_period" property="period" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <result column="goods_credit" property="credit" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <result column="goods_first_class_name" property="firstClassName" jdbcType="VARCHAR"
+                    javaType="java.lang.String"/>
+            <result column="goods_second_class_name" property="secondClassName" jdbcType="VARCHAR"
+                    javaType="java.lang.String"/>
+        </association>
+    </resultMap>
+    <sql id="Base_Column_List">
+      `order`.id as order_id, `order`.user_id as order_user_id, `order`.status as order_status, `order`.total_amount as order_total_amount, `order`.total_money as order_total_money, `order`.`type` as order_type,
+      user.id as user_id, user.name as user_name, user.phone as user_phone, user.create_time as user_create_time, user.password as user_password, user.role as user_role, user.account as user_account, user.login_time as user_login_time, user.email as user_email, user.company as user_company, user.gender as user_gender, user.wechat as we_chat, user.location as user_location, user.birthday as user_birthday, user.headUrl as user_headUrl, user.deposit_status as user_deposit_status,user.field as user_field, user.ps as user_ps, user.id_card as user_id_card, user.account_balance as user_account_balance,
+      order_detail.id as order_detail_id, order_detail.order_id as order_detail_order_id, order_detail.goods_id as order_detail_goods_id, order_detail.goods_count as order_detail_goods_count, order_detail.goods_money as order_detail_goods_money,
+      goods.id as goods_id, goods.user_id as goods_user_id,goods.name as goods_name, goods.price as goods_price, goods.intro as goods_intro, goods.create_time as goods_create_time, goods.image as goods_image, goods.type_id as goods_type_id, goods.theme as goods_theme, goods.period as goods_period, goods.credit as goods_credit, goods.first_class_name as goods_first_class_name, goods.second_class_name as goods_second_class_name, goods.status as goods_status
+  </sql>
+    <select id="get" resultMap="BaseResultMap" parameterType="Map">
+        select
+        <include refid="Base_Column_List"/>
+        from `order` left join user on `order`.user_id = user.id
+        left join order_detail on order_detail.order_id = `order`.id
+        left join goods on goods.id = order_detail.goods_id
+        where 1 = 1
+        <if test="order.user != null">
+            and
+            `order`.user_id = #{order.user.id}
+        </if>
+        <if test="order.id != null">
+            and
+            `order`.id = #{order.id}
+        </if>
+        <if test="order.type != null">
+            and
+            `order`.`type` = #{order.type};
+        </if>
+
+    </select>
+    <delete id="delete" parameterType="Map">
+      delete from `order`
+      where id = #{order.id,jdbcType=INTEGER}
+    </delete>
+
+    <insert id="insert" parameterType="Map" useGeneratedKeys="true" keyProperty="order.id">
+    insert into `order`(id,user_id, status, total_amount, total_money, `type`)
+    values (#{order.id},#{order.user.id,jdbcType=INTEGER}, #{order.status},#{order.totalAmount}, #{order.totalMoney},#{order.type})
+    </insert>
+
+    <select id="getRowCount" parameterType="Map" resultType="int">
+        select count(*) from `order`
+        where 1 = 1
+        <if test="order.user != null and order.user.id != null">
+            and
+            user_id = #{order.user.id,jdbcType=INTEGER}
+        </if>
+        <if test="order.type != null">
+            and
+            `order`.`type` = #{order.type};
+        </if>
+    </select>
+
+
+    <update id="update" parameterType="Map">
+        update `order`
+        set
+        <if test="order.status != null and order.status != ''">
+            status = #{order.status}
+        </if>
+        where 1 = 1
+        <if test="order.id != null">
+            and
+            id = #{order.id}
+        </if>
+    </update>
+</mapper>

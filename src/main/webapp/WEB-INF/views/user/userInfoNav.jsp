@@ -12,18 +12,24 @@
     <div class="adjust-10"></div>
     <div class="contract-crea-left left blue">
         <div class="contract-crea-not-clicked" id="userCenter">
-            <button onclick="changeUserPage(userCenter);">会员信息</button>
+            <button onclick="changeUserPage('/qingguo/user/userCenter');">会员信息</button>
         </div>
         <div class="contract-crea-not-clicked" id="userHead">
-            <button onclick="changeUserPage(userHead);">修改头像</button>
+            <button onclick="changeUserPage('/qingguo/user/userHead');">修改头像</button>
         </div>
         <div class="contract-crea-not-clicked" id="userPassword">
-            <button onclick="changeUserPage(userPassword);">修改密码</button>
+            <button onclick="changeUserPage('/qingguo/user/userPassword');">修改密码</button>
+        </div>
+        <div class="contract-crea-not-clicked" id="publishManage">
+            <button onclick="changeUserPage('/qingguo/publish/publishManage');">发布管理</button>
+        </div>
+        <div class="contract-crea-not-clicked" id="orderManage">
+            <button onclick="changeUserPage('/qingguo/order/orderManage')">订单管理</button>
         </div>
     </div>
 </div>
 <script>
-    function changeUserPage(page){
-        window.location.href=page.id + "";
+    function changeUserPage(link){
+        window.location.href=link;
     }
 </script>

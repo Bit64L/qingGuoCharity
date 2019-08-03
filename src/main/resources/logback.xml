@@ -3,6 +3,7 @@
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>%date{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+            <charset>UTF-8</charset>
         </encoder>
     </appender>
 
@@ -55,7 +56,7 @@
     </appender>
     
     <!-- 很多人使用Mybatis的时候，控制台不能输出SQL语句，造成调试困难。只需要让DAO层的日志级别调整为DEBUG就可以了 -->
-    <logger name="com.qingguo.dao" level="DEBUG" />
+    <logger name="org.qingGuo.dao" level="DEBUG" />
 
     <!-- 指定项目可输出的最低级别日志 -->
     <root level="INFO">

@@ -21,6 +21,15 @@
     <mvc:resources mapping="/js/**" location="/js/" cache-period="31556926"/>
     <mvc:resources mapping="/css/**" location="/css/" cache-period="31556926"/>
     <mvc:resources mapping="/fonts/**" location="/fonts/" cache-period="31556926"/>
+    <mvc:resources mapping="/sass/**" location="/sass/" cache-period="31556926"/>
+    <mvc:resources mapping="/video/**" location="/video/" cache-period="31556926"/>
 
+    <!-- 文件的上传下载配置 -->
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="defaultEncoding" value="utf-8" />
+        <property name="maxUploadSize" value="10485760000" />
+        <property name="maxInMemorySize" value="4096" />
+    </bean>
 </beans>
     

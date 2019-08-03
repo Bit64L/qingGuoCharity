@@ -215,7 +215,7 @@ a, area {
 
 .sidebar_popup {
     position: absolute;
-    left: 170px;
+    left: 160px;
     width: 200px;
     background: rgba(255, 184, 51, 0.16);
     display: none;

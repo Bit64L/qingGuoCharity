@@ -5,6 +5,8 @@ import java.util.Date;
 public class User {
     private Integer id;
 
+    private ShoppingCart shoppingCart;
+
     private String name;
 
     private String phone;
@@ -23,22 +25,25 @@ public class User {
 
     private String company;
 
-    public User(Integer id, String name, String phone, Date createTime, String password, String role, String account, Date loginTime, String email, String company) {
-        this.id = id;
-        this.name = name;
-        this.phone = phone;
-        this.createTime = createTime;
-        this.password = password;
-        this.role = role;
-        this.account = account;
-        this.loginTime = loginTime;
-        this.email = email;
-        this.company = company;
-    }
+    private String gender;
 
-    public User() {
-        super();
-    }
+    private String wechat;
+
+    private String location;
+
+    private String birthday;
+
+    private String headUrl;
+
+    private String depositStatus;
+
+    private String field;
+
+    private String ps;
+
+    private String idCard;
+
+    private Double accountBalance;
 
     public Integer getId() {
         return id;
@@ -48,12 +53,20 @@ public class User {
         this.id = id;
     }
 
+    public ShoppingCart getShoppingCart() {
+        return shoppingCart;
+    }
+
+    public void setShoppingCart(ShoppingCart shoppingCart) {
+        this.shoppingCart = shoppingCart;
+    }
+
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+        this.name = name;
     }
 
     public String getPhone() {
@@ -61,7 +74,7 @@ public class User {
     }
 
     public void setPhone(String phone) {
-        this.phone = phone == null ? null : phone.trim();
+        this.phone = phone;
     }
 
     public Date getCreateTime() {
@@ -77,7 +90,7 @@ public class User {
     }
 
     public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
+        this.password = password;
     }
 
     public String getRole() {
@@ -85,7 +98,7 @@ public class User {
     }
 
     public void setRole(String role) {
-        this.role = role == null ? null : role.trim();
+        this.role = role;
     }
 
     public String getAccount() {
@@ -93,7 +106,7 @@ public class User {
     }
 
     public void setAccount(String account) {
-        this.account = account == null ? null : account.trim();
+        this.account = account;
     }
 
     public Date getLoginTime() {
@@ -109,7 +122,7 @@ public class User {
     }
 
     public void setEmail(String email) {
-        this.email = email == null ? null : email.trim();
+        this.email = email;
     }
 
     public String getCompany() {
@@ -117,6 +130,86 @@ public class User {
     }
 
     public void setCompany(String company) {
-        this.company = company == null ? null : company.trim();
+        this.company = company;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getWechat() {
+        return wechat;
+    }
+
+    public void setWechat(String wechat) {
+        this.wechat = wechat;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getHeadUrl() {
+        return headUrl;
+    }
+
+    public void setHeadUrl(String headUrl) {
+        this.headUrl = headUrl;
+    }
+
+    public String getDepositStatus() {
+        return depositStatus;
+    }
+
+    public void setDepositStatus(String depositStatus) {
+        this.depositStatus = depositStatus;
+    }
+
+    public String getField() {
+        return field;
+    }
+
+    public void setField(String field) {
+        this.field = field;
+    }
+
+    public String getPs() {
+        return ps;
+    }
+
+    public void setPs(String ps) {
+        this.ps = ps;
+    }
+
+    public String getIdCard() {
+        return idCard;
+    }
+
+    public void setIdCard(String idCard) {
+        this.idCard = idCard;
+    }
+
+    public Double getAccountBalance() {
+        return accountBalance;
+    }
+
+    public void setAccountBalance(Double accountBalance) {
+        this.accountBalance = accountBalance;
     }
 }

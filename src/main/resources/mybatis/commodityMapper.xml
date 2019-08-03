@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.qingGuo.dao.CommodityDao" >
+  <resultMap id="BaseResultMap" type="org.qingGuo.model.Commodity" >
+      <id column="id" property="id" />
+      <result column="name" property="name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <result column="price" property="price"/>
+      <result column="intro" property="intro" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <result column="create_time" property="createTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <result column="image" property="image" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <result column="type_id" property="typeId" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <result column="theme" property="theme" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <result column="period" property="period" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <result column="credit" property="credit" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <result column="first_class_name" property="firstClassName" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <result column="second_class_name" property="secondClassName" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <result column="status" property="status" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <association property="user" javaType="org.qingGuo.model.User">
+        <id column="user_id" property="id"/>
+        <result column="user_name" property="name"/>
+        <result column="user_phone" property="phone"/>
+        <result column="user_create" property="create"/>
+        <result column="user_create_time" property="createTime"/>
+        <result column="user_password" property="password"/>
+        <result column="user_role" property="role"/>
+        <result column="user_account" property="account"/>
+        <result column="user_login_time" property="loginTime"/>
+        <result column="user_email" property="email"/>
+        <result column="user_company" property="company"/>
+        <result column="user_wechat" property="wechat"/>
+        <result column="user_location" property="location"/>
+        <result column="user_birthday" property="birthday"/>
+        <result column="user_headUrl" property="headUrl"/>
+        <result column="user_deposit_status" property="depositStatus"/>
+        <result column="user_field" property="field"/>
+        <result column="user_ps" property="ps"/>
+        <result column="user_id_card" property="idCard"/>
+      </association>
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    goods.id, goods.name, goods.price, goods.intro, goods.create_time, goods.image, goods.type_id, goods.theme, goods.period, goods.credit, goods.first_class_name, goods.second_class_name,goods.status,
+    user.id as user_id, user.name as name, user.phone as user_phone, user.create_time as user_create_time, user.password as user_password, user.role as user_role, user.account as user_account, user.login_time as user_login_time, user.email as user_email, user.company as user_company, user.gender as user_gender, user.wechat as user_wechat, user.location as user_location, user.birthday as user_birthday, user.headUrl as user_headUrl, user.deposit_status as user_deposit_status, user.field as user_field, user.ps as user_ps, user.id_card as user_id_card
+  </sql>
+  <select id="get" resultMap="BaseResultMap" parameterType="Map" >
+    select 
+    <include refid="Base_Column_List" />
+    from goods left join user on goods.user_id = user.id
+    where 1 = 1
+    <if test="commodity.user != null and commodity.user.id != null" >
+      and
+      user_id = #{commodity.user.id,jdbcType=INTEGER}
+    </if>
+    <if test="commodity.id != null" >
+      and
+      goods.id = #{commodity.id}
+    </if>
+    <if test="commodity.name != null" >
+      and
+      goods.name like concat('%',#{commodity.name},'%')
+    </if>
+    <if test="commodity.firstClassName != null" >
+      and
+      goods.first_class_name = #{commodity.firstClassName}
+    </if>
+    <if test="commodity.secondClassName != null" >
+      and
+      goods.second_class_name = #{commodity.secondClassName}
+    </if>
+    <if test="offset != null and size != null">
+      limit #{offset},#{size}
+    </if>
+
+  </select>
+  <delete id="delete" parameterType="Map" >
+    delete from goods
+    where id = #{commodity.id,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="Map" useGeneratedKeys="true" keyProperty="commodity.id">
+    insert into goods (id, name, price,
+      intro, create_time, image, 
+      type_id, theme, period, 
+      credit, first_class_name, second_class_name,user_id,status
+      )
+    values (#{commodity.id,jdbcType=VARCHAR}, #{commodity.name,jdbcType=VARCHAR}, #{commodity.price},
+      #{commodity.intro,jdbcType=VARCHAR}, #{commodity.createTime,jdbcType=TIMESTAMP}, #{commodity.image,jdbcType=VARCHAR},
+      #{commodity.typeId,jdbcType=VARCHAR}, #{commodity.theme,jdbcType=VARCHAR}, #{commodity.period,jdbcType=VARCHAR},
+      #{commodity.credit,jdbcType=VARCHAR}, #{commodity.firstClassName,jdbcType=VARCHAR}, #{commodity.secondClassName,jdbcType=VARCHAR},
+      #{commodity.user.id,jdbcType=INTEGER},#{commodity.status,jdbcType=VARCHAR}
+      )
+  </insert>
+
+  <update id="update" parameterType="Map" >
+    update goods
+    <set >
+      <if test="commodity.name != null" >
+        name = #{commodity.name,jdbcType=VARCHAR},
+      </if>
+      <if test="commodity.price != null" >
+        price = #{commodity.price},
+      </if>
+      <if test="commodity.intro != null" >
+        intro = #{commodity.intro,jdbcType=VARCHAR},
+      </if>
+      <if test="commodity.createTime != null" >
+        create_time = #{commodity.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="commodity.image != null" >
+        image = #{commodity.image,jdbcType=VARCHAR},
+      </if>
+      <if test="commodity.typeId != null" >
+        type_id = #{commodity.typeId,jdbcType=VARCHAR},
+      </if>
+      <if test="commodity.theme != null" >
+        theme = #{commodity.theme,jdbcType=VARCHAR},
+      </if>
+      <if test="commodity.period != null" >
+        period = #{commodity.period,jdbcType=VARCHAR},
+      </if>
+      <if test="commodity.credit != null" >
+        credit = #{commodity.credit,jdbcType=VARCHAR},
+      </if>
+      <if test="commodity.firstClassName != null" >
+        first_class_name = #{commodity.firstClassName,jdbcType=VARCHAR},
+      </if>
+      <if test="commodity.secondClassName != null" >
+        second_class_name = #{commodity.secondClassName,jdbcType=VARCHAR},
+      </if>
+      <if test="commodity.user != null and commodity.user.id != null" >
+        user_id = #{commodity.user.id,jdbcType=INTEGER},
+      </if>
+      <if test="commodity.status != null" >
+        status = #{commodity.status,jdbcType=VARCHAR}
+      </if>
+    </set>
+    where id = #{commodity.id,jdbcType=INTEGER}
+  </update>
+
+
+  <select id="getRowCount" parameterType="Map" resultType="int">
+    select count(*)  from goods
+    where 1 = 1
+    <if test="commodity.user != null and commodity.user.id != null" >
+      and
+      user_id = #{commodity.user.id,jdbcType=INTEGER}
+    </if>
+    <if test="commodity.firstClassName != null and commodity.firstClassName != ''" >
+      and
+      first_class_name = #{commodity.firstClassName,jdbcType=VARCHAR}
+    </if>
+    <if test="commodity.secondClassName != null and commodity.secondClassName != ''" >
+      and
+      second_class_name = #{commodity.secondClassName,jdbcType=VARCHAR}
+    </if>
+  </select>
+</mapper>

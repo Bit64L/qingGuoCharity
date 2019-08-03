@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.qingGuo.dao.TransactionDao">
+    <insert id="insert" parameterType="Map" useGeneratedKeys="true" keyProperty="transaction.id">
+    insert into `transaction`(payer_id, charger_id, money, type)
+    values (#{transaction.payer.id},#{transaction.charger.id}, #{transaction.money},#{transaction.type})
+    </insert>
+
+</mapper>

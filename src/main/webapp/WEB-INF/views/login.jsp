@@ -7,23 +7,20 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="css/bootstrap.css" rel="stylesheet"/>
-    <link href="css/login.css" rel="stylesheet"/>
-    <link href="css/header.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/standard.css">
+    <link href="/qingguo/css/bootstrap.css" rel="stylesheet"/>
+    <link href="/qingguo/css/login.css" rel="stylesheet"/>
+    <link href="/qingguo/css/header.css" rel="stylesheet">
+    <link rel="stylesheet" href="/qingguo/css/standard.css">
     <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
-    <%-- <link rel="stylesheet" type="text/css" href='<c:url value="css/style.css"></c:url>'>
-    <link rel="stylesheet" type="text/css" href='<c:url value="css/bootstrap.css"></c:url>'>
-    <script type="text/javascript" src='<c:url value="js/jquery.js"></c:url>'></script> --%>
 </head>
 <body>
 <div class="row">
     <div class="col-md-12">
         <div class="header-first standard-out">
             <div class="left">
-                <a href="/qingguo">首页</a>
-                <a href="login">登录</a>
-                <a href="register">注册</a>
+                <a href="/qingguo/index">首页</a>
+                <a href="/qingguo/login">登录</a>
+                <a href="/qingguo/register">注册</a>
             </div>
             <div class="clear"></div>
         </div>
@@ -36,17 +33,18 @@
                 <div class="col-md-5">
                     <h1>欢迎</h1>
 
-                    <form class="form" method="post">
-                        <input type="text" placeholder="用户名" name="username" class="inputLogin" id="username">
-
+                    <form class="form" method="post" action="/qingguo/user/loginAction">
+                        <input type="text" placeholder="用户名" name="phone" class="inputLogin" id="username">
+                        <div style="height:26px;width:300px; text-align:right;">
+                            <input id="error-username" class="error" value="" disabled/>
+                        </div>
                         <input type="password" name="password" placeholder="密码" class="inputLogin" id="psd"
                                style="margin-bottom:0;">
-
-                        <div class="radio"
-                             style="margin-bottom:2px; margin-top:-2px; font-size:16px; width:200px; display:inline-block"
-                             onChange="showSignUp();">
+                        <div style="height:26px;width:300px; text-align:right;">
+                            <input id="error-password" class="error" value="${message}" disabled/>
                         </div>
-                        <button id="login-button" style="margin-top:14px; display:block;" onclick="return check();">登录
+
+                        <button id="login-button" style="margin-top:14px; display:block;" onclick="">登录
                         </button>
                     </form>
                     <form id="initialSignUp" action="supplier/signUp?signup=true" method="post" hidden="hidden">
