@@ -1,6 +1,7 @@
 # QingGuo Public Welfare Mall
 
 ## Structure of Directories
+```
 .  
 ├── src  
 │   ├── main  
@@ -36,3 +37,4 @@
 │   └── test  
 │       └── java  
 └── upload  
+```
